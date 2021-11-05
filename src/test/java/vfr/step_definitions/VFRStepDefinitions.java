@@ -9,8 +9,9 @@ import vfr.domain.FlightLevel;
 import vfr.domain.RelativePosition;
 import vfr.domain.Distance;
 
-import java.util.List;
 import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class VFRStepDefinitions {
     private Distance horizontalDistance;
@@ -21,11 +22,11 @@ public class VFRStepDefinitions {
     Distance visibility;
 
     @ParameterType("FL (.*)")
-    public FlightLevel flightLevel(Integer value) {
-        return FlightLevel.of(value);
+    public FlightLevel flightLevel(String value) {
+        return FlightLevel.of(Integer.parseInt(value));
     }
 
-    @Given("the plane is flying at FL {int}")
+    @Given("the plane is flying at {flightLevel}")
     public void the_plane_is_flying_at(FlightLevel flightLevel) {
         this.flightLevel = flightLevel;
 //        this.flightLevel = FlightLevel.of(flightLevel);
@@ -61,7 +62,6 @@ public class VFRStepDefinitions {
 
     @Then("the VFT warning should be displayed: {word}")
     public void the_vft_warning_should_be_displayed_no(String yesNo) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        //todo
     }
 }

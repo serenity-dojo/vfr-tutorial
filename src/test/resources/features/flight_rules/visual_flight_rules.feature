@@ -29,11 +29,11 @@ Feature: Visual Flight Rules Warnings
         |    10 km    |   2000 m           |   1200 ft           | No                |                   |
         |    10 km    |   1400 m           |   1200 ft           | Yes               |                   |
         |    10 km    |   2000 m           |    800 ft           | Yes               |                   |
-        |    5  km    |   2000 m           |   1200 ft           | Yes               |                   |
+        |     5 km    |   2000 m           |   1200 ft           | Yes               |                   |
 
 #
 #      Scenario Outline: Flying below FL100 with clouds
-#        Given the plane is fying at FL 90
+#        Given the plane is flying at FL 90
 #        When the current visibility is <Visibility>
 #        And clouds are reported at:
 #          | Horizontal distance to clouds | Vertical distance to clouds |

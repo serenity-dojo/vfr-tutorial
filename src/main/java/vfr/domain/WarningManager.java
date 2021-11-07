@@ -7,14 +7,25 @@ public class WarningManager {
 
     public WarningManager(FlightConditions flightConditions) {
 
+//        if(flightConditions.getFlightLevel()>=100) {
+//            if(flightConditions.getVisibility() >= 8 &&
+//                flightConditions.getHorizontalDistance() >= 1500 &&
+//                flightConditions.getHeightAboveClouds() >= 1000) {
+//                warning = false;
+//            }
+//        }
+        int minVisibility;
         if(flightConditions.getFlightLevel()>=100) {
-            if(flightConditions.getVisibility() >= 8 &&
+            minVisibility = 8;
+        }else{
+            minVisibility = 5;
+        }
+        if(flightConditions.getVisibility() >= minVisibility &&
                 flightConditions.getHorizontalDistance() >= 1500 &&
                 flightConditions.getHeightAboveClouds() >= 1000) {
-                warning = false;
-            }
+            warning = false;
         }
-        //todo: flight conditions below FL 100
+        //todo: flight conditions closer to terrain
 
     }
 

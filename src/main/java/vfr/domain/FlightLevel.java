@@ -12,6 +12,10 @@ public class FlightLevel {
         return new FlightLevel(flightLevel);
     }
 
+    public Integer flightLevelValue() {
+        return flightLevel;
+    }
+
     public int inFeet() {
         return flightLevel * 100;
     }

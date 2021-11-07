@@ -10,7 +10,7 @@ public class FlightConditions {
     public FlightConditions(FlightLevel flightLevel, Distance visibility,
                             RelativePosition positionOfClouds
                             /*Distance horizontalDistance, Distance heightAboveClouds*/) {
-        this.flightLevel = flightLevel.inFeet();
+        this.flightLevel = flightLevel.flightLevelValue();
         this.visibility = visibility.inKilometers();
         this.horizontalDistance = positionOfClouds.horizontalDistance.getValue();
         this.heightAboveClouds = positionOfClouds.verticalDistance.inFeet();

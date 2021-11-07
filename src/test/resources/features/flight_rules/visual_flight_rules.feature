@@ -20,32 +20,33 @@ Feature: Visual Flight Rules Warnings
       Given the plane is flying at FL 110
       When the current visibility is <Visibility>
       And clouds are reported at:
-          | Horizontal distance to clouds | Vertical distance to clouds |
-          | <Distance to clouds>          | <Height above clouds>       |
+        | Horizontal distance to clouds | Vertical distance to clouds |
+        | <Distance to clouds>          | <Height above clouds>       |
       Then the VFT warning should be displayed: <Warning Displayed>
 
       Examples:
-        | Visibility  | Distance to clouds | Height above clouds | Warning Displayed | Reason            |
-        |    10 km    |   2000 m           |   1200 ft           | No                |                   |
-        |    10 km    |   1400 m           |   1200 ft           | Yes               |                   |
-        |    10 km    |   2000 m           |    800 ft           | Yes               |                   |
-        |     5 km    |   2000 m           |   1200 ft           | Yes               |                   |
+        | Visibility | Distance to clouds | Height above clouds | Warning Displayed | Reason                                   |
+        | 10 km      | 2000 m             | 1200 ft             | No                | Enough visibility and distance to clouds |
+        | 10 km      | 1400 m             | 1200 ft             | Yes               | Horizontal distance is lower than 1500 m |
+        | 10 km      | 2000 m             | 800 ft              | Yes               | Vertical distance is lower that 1000 ft  |
+        | 5 km       | 2000 m             | 1200 ft             | Yes               | Visibility lower than 8 km               |
 
-#
-#      Scenario Outline: Flying below FL100 with clouds
-#        Given the plane is flying at FL 90
-#        When the current visibility is <Visibility>
-#        And clouds are reported at:
-#          | Horizontal distance to clouds | Vertical distance to clouds |
-#          | <Distance to clouds>          | <Height below clouds>       |
-#        Then the VFT warning should be displayed: <Warning Displayed>
-#
-#        Examples:
-#          | Visibility  | Distance to clouds | Height below clouds | Warning Displayed | Reason                                           |
-#          |    7 km     |   2000 m           |   1200 ft           | No                |                                                  |
-#          |    7 km     |   1400 m           |   1200 ft           | Yes               | Horizontal distance is lower than 1500m          |
-#          |    7 km     |   2000 m           |    800 ft           | Yes               | Vertical distance to clouds is lower than 1000ft |
-#          |    3  km    |   2000 m           |   1200 ft           | Yes               | Visibility is lower than 5 km                    |
+  Rule: Flying above 10000ft visibility must be at least 5km
+
+    Scenario Outline: Flying below FL100 with clouds
+      Given the plane is flying at FL 90
+      When the current visibility is <Visibility>
+      And clouds are reported at:
+        | Horizontal distance to clouds | Vertical distance to clouds |
+        | <Distance to clouds>          | <Height below clouds>       |
+      Then the VFT warning should be displayed: <Warning Displayed>
+
+      Examples:
+        | Visibility | Distance to clouds | Height below clouds | Warning Displayed | Reason                                           |
+        | 7 km       | 2000 m             | 1200 ft             | No                |                                                  |
+        | 7 km       | 1400 m             | 1200 ft             | Yes               | Horizontal distance is lower than 1500m          |
+        | 7 km       | 2000 m             | 800 ft              | Yes               | Vertical distance to clouds is lower than 1000ft |
+        | 3 km       | 2000 m             | 1200 ft             | Yes               | Visibility is lower than 5 km                    |
 
 #       Scenario Outline: Flying close to a flat terrain
 #          Given the plane is flying at 2700ft

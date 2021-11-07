@@ -5,21 +5,20 @@ import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import vfr.domain.FlightLevel;
-import vfr.domain.RelativePosition;
-import vfr.domain.Distance;
+import vfr.domain.*;
 
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VFRStepDefinitions {
-    private Distance horizontalDistance;
-    private Distance heightAboveClouds;
+
     private RelativePosition positionOfClouds;
 
     FlightLevel flightLevel;
     Distance visibility;
+
+    private FlightConditions flightConditions;
 
     @ParameterType("FL (.*)")
     public FlightLevel flightLevel(String value) {
@@ -34,7 +33,7 @@ public class VFRStepDefinitions {
 
     @When("the current visibility is {visibility}")
     public void the_current_visibility_is_km(Distance visibilityInKm) {
-        this.visibility = visibility;
+        this.visibility = visibilityInKm;
     }
 
     @DataTableType
@@ -62,6 +61,8 @@ public class VFRStepDefinitions {
 
     @Then("the VFT warning should be displayed: {word}")
     public void the_vft_warning_should_be_displayed_no(String yesNo) {
-        //todo
+
+        flightConditions = new FlightConditions(flightLevel, visibility, positionOfClouds);
+        assertThat(WarningManager.of(flightConditions).inStringFormat()).isEqualTo(yesNo);
     }
 }

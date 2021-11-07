@@ -22,7 +22,7 @@ Feature: Visual Flight Rules Warnings
       And clouds are reported at:
           | Horizontal distance to clouds | Vertical distance to clouds |
           | <Distance to clouds>          | <Height above clouds>       |
-#      Then the VFT warning should be displayed: <Warning Displayed>
+      Then the VFT warning should be displayed: <Warning Displayed>
 
       Examples:
         | Visibility  | Distance to clouds | Height above clouds | Warning Displayed | Reason            |

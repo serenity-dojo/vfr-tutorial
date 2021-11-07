@@ -31,5 +31,8 @@ public class Distance {
         return value / 1000;
     }
 
+    public Double inFeet() {
+        return value * 3.281;
+    }
 
 }
